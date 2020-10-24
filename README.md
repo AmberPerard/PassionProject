@@ -13,5 +13,5 @@ So, I would like to research how the AR platform works and how to build a mobile
 * IOS build of the game
 * Android build of the game
 
-# Deliverables
-Blog url: tba
+# Blog URL
+Follow my progress on my [Blog](tba)
