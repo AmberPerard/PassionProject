@@ -14,4 +14,4 @@ So, I would like to research how the AR platform works and how to build a mobile
 * Android build of the game
 
 # Blog URL
-Follow my progress on my [Blog](tba)
+Follow my progress on my [Blog](https://amberperard.wixsite.com/passionprojectamber)
