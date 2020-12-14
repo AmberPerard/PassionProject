@@ -20,7 +20,7 @@ public class ShowName : MonoBehaviour
         //{
         //    print(characterName);
         //}
-        Debug.Log(characterName);
+        //Debug.Log(characterName);
     }
 
     // Update is called once per frame
@@ -28,7 +28,7 @@ public class ShowName : MonoBehaviour
     {
         if (string.IsNullOrEmpty(characterName) == true)
         {
-            Debug.Log("empty");
+            //Debug.Log("empty");
             characterName = PlayerPrefs.GetString("User", string.Empty);
         }
 
@@ -36,8 +36,7 @@ public class ShowName : MonoBehaviour
         {
             //Debug.Log("Not Empty");
             //Debug.Log(characterName);
-            title.text = "To ";
-            title.text += characterName;
+            title.text = characterName;
         }
 
     }

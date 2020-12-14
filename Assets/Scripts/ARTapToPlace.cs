@@ -7,15 +7,19 @@ using UnityEngine.XR.ARSubsystems;
 
 public class ARTapToPlace : MonoBehaviour
 {
-    public GameObject objectToPlace;
     public GameObject placementIndicator;
     public GameObject nameOverlay;
 
+    private GameObject objectToPlace;
     private ARRaycastManager aRRaycastManager;
     private Pose PlacementPose;
     private bool placementPoseIsValid = false;
     private GameObject spawnedObject;
     private string characterName;
+    private int SpawnObjectPost;
+
+    public GameObject[] SpawnObjects;
+    int index;
 
 
     void Start()
@@ -23,11 +27,27 @@ public class ARTapToPlace : MonoBehaviour
         aRRaycastManager = FindObjectOfType<ARRaycastManager>();
         nameOverlay.SetActive(false);
         characterName = PlayerPrefs.GetString("User");
-        Debug.Log(characterName);
+        SpawnObjectPost = PlayerPrefs.GetInt("SpawnObjectPos");
     }
 
     void Update()
     {
+        //first time
+        if (SpawnObjectPost < 0)
+        {
+
+            index = Random.Range(0, SpawnObjects.Length);
+            objectToPlace = SpawnObjects[index];
+            Debug.Log(objectToPlace.name);
+            PlayerPrefs.SetInt("SpawnObjectPos", index);
+            PlayerPrefs.Save();
+            Debug.Log(PlayerPrefs.GetInt("SpawnObjectPos"));
+         }
+        else
+        {
+        
+            objectToPlace = SpawnObjects[SpawnObjectPost];
+        }
 
         if (spawnedObject == null)
         {
@@ -37,12 +57,27 @@ public class ARTapToPlace : MonoBehaviour
 
             if (placementPoseIsValid && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
             {
+                //second time
+                if (SpawnObjectPost < 0)
+                {
+
+                    index = Random.Range(0, SpawnObjects.Length);
+                    objectToPlace = SpawnObjects[index];
+                    Debug.Log(objectToPlace.name);
+                    PlayerPrefs.SetInt("SpawnObjectPos", index);
+                    PlayerPrefs.Save();
+                    Debug.Log(PlayerPrefs.GetInt("SpawnObjectPos"));
+                }
+                else
+                {
+
+                    objectToPlace = SpawnObjects[SpawnObjectPost];
+                }
+
                 spawnedObject = Instantiate(objectToPlace, PlacementPose.position, PlacementPose.rotation);
                 spawnedObject.transform.LookAt(Camera.main.transform);
-                Debug.Log(characterName);
                 if (string.IsNullOrEmpty(characterName) == true)
                 {
-                    Debug.Log(characterName);
                     nameOverlay.SetActive(true);
                 }
             }

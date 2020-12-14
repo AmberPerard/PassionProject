@@ -59,7 +59,7 @@ public class SelectObject : MonoBehaviour
                     {
                         anim = SelectedObject.GetComponentInParent<Animator>();
                         anim.SetTrigger(dancingHash);
-                        Debug.Log("You clicked on the Cactus");
+                        Debug.Log("You clicked on the Character");
 
                     }
                     if (SelectedObject.tag == "Food")
